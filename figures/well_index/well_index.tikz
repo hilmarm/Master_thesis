@@ -1,0 +1,33 @@
+% -*- root: ../../mainThesis.tex -*-
+
+\begin{tikzpicture}[scale=1]
+
+\begin{axis}[grid=major,
+			xmin=0, xmax=10,
+			ymin=0, ymax=10,
+			zmin=0, zmax=10,
+      		zlabel={$\Delta z$},
+      		xlabel={$\Delta x$},
+      		ylabel={$\Delta y$},
+      		xtick={23},
+      		ytick={23},
+      		ztick={23}
+    ]
+\addplot3 [line width=1mm, red] coordinates { (0,4,3) (7,10,7) } ;
+\addplot3 [line width=0.9mm, blue] coordinates { (0,0,0) (7,0,0) };
+\addplot3 [line width=0.9mm, blue] coordinates { (0,4,0) (0,10,0) };
+\addplot3 [line width=0.9mm, blue] coordinates { (0,0,3) (0,0,7) };
+\addplot3 [dashed] coordinates { (0,4,3) (0,4,0) };
+\addplot3 [dashed] coordinates { (0,4,3) (0,0,3) };
+\addplot3 [dashed] coordinates { (7,0,0) (7,10,0) };
+\addplot3 [dashed] coordinates { (7,10,0) (7,10,7) };
+\addplot3 [dashed] coordinates { (7,10,7) (0,10,7) };
+\addplot3 [dashed] coordinates { (0,10,7) (0,0,7) };
+\addlegendentry{Well};
+\addplot3[] coordinates { (3.5,0,0) } node[anchor=south, black] {$L_x$};
+\addplot3[] coordinates { (.5,6,0) } node[anchor=west, black] {$L_y$};
+\addplot3[] coordinates { (0,0,5.5) } node[anchor=west, black] {$L_z$};
+\end{axis}
+
+
+\end{tikzpicture}

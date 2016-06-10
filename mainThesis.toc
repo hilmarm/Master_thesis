@@ -1,0 +1,60 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {paragraph}{What is Petroleum Field Development(PFD).}{1}{section*.4}
+\contentsline {section}{\numberline {1.1}The general well placement problem}{1}{section.1.1}
+\contentsline {paragraph}{What is the objective of well placement optimization.}{1}{section*.5}
+\contentsline {paragraph}{How wells are parametrized.}{2}{section*.6}
+\contentsline {paragraph}{How is the objective computed, what is a reservoir model/simulation.}{2}{section*.7}
+\contentsline {paragraph}{What is the well index.}{2}{section*.8}
+\contentsline {paragraph}{How we solve for the well placement problem.}{3}{section*.9}
+\contentsline {paragraph}{Well placement constraints.}{3}{section*.10}
+\contentsline {paragraph}{How do we solve for the constrained well placement problem.}{3}{section*.11}
+\contentsline {paragraph}{Tasks for this thesis}{4}{section*.12}
+\contentsline {chapter}{\numberline {2}Problem formulation}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Well problem formulation}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Well length constraint}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Inter-well distance constraint}{6}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Reservoir bound constraint}{6}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Projection of multiple constraints}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Simultaneous constraint projection}{7}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Method of alternating projections}{8}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Inter-well distance projection on more than two wells}{8}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Alternating projection pseudo code}{9}{subsection.2.3.3}
+\contentsline {chapter}{\numberline {3}Constraint handling}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Well length constraint}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Case 1. Initial points feasible}{15}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Case 2. Initial points too close}{15}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Case 3. Initial points too distant}{17}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Inter-well distance constraint}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Number of points moved}{18}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Four-point solution}{20}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Three-point solution}{24}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Two-point solution}{25}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Complete inter-well distance constraint solution}{26}{subsection.3.2.5}
+\contentsline {chapter}{\numberline {4}Well index calculation}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}Projection well index}{27}{section.4.1}
+\contentsline {section}{\numberline {4.2}Computing well trajectory and projection}{29}{section.4.2}
+\contentsline {chapter}{\numberline {5}Implementation}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Software}{31}{section.5.1}
+\contentsline {section}{\numberline {5.2}Well length constraint projection}{31}{section.5.2}
+\contentsline {section}{\numberline {5.3}Inter-well distance constraint projection}{31}{section.5.3}
+\contentsline {section}{\numberline {5.4}Alternating projections}{32}{section.5.4}
+\contentsline {section}{\numberline {5.5}Well index calculation and intersecting blocks}{32}{section.5.5}
+\contentsline {chapter}{\numberline {6}Results and numerical tests}{35}{chapter.6}
+\contentsline {section}{\numberline {6.1}Well constraint projections}{35}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Well length projection}{35}{subsection.6.1.1}
+\contentsline {paragraph}{Well length constraint on a single well}{35}{section*.24}
+\contentsline {subsection}{\numberline {6.1.2}Inter-well distance projection}{38}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Alternating projections to joint problem}{39}{subsection.6.1.3}
+\contentsline {section}{\numberline {6.2}Well index calculation}{42}{section.6.2}
+\contentsline {chapter}{\numberline {7}Summary and discussion}{45}{chapter.7}
+\contentsline {section}{\numberline {7.1}Projection to feasible space}{45}{section.7.1}
+\contentsline {section}{\numberline {7.2}Well index calculation}{46}{section.7.2}
+\contentsline {chapter}{\numberline {8}Further work}{47}{chapter.8}
+\contentsline {section}{\numberline {8.1}FieldOpt integration}{47}{section.8.1}
+\contentsline {section}{\numberline {8.2}Well length constraint projection}{47}{section.8.2}
+\contentsline {section}{\numberline {8.3}Inter-well distance constraint projection}{47}{section.8.3}
+\contentsline {section}{\numberline {8.4}Alternating projections}{48}{section.8.4}
+\contentsline {chapter}{\numberline {A}Code}{49}{appendix.A}
+\contentsline {section}{\numberline {A.1}Code for well constraint projection}{49}{section.A.1}
+\contentsline {section}{\numberline {A.2}Code inter-well distance projection}{50}{section.A.2}

@@ -1,0 +1,30 @@
+% -*- root: ../../mainThesis.tex -*-
+
+\begin{tikzpicture}[scale=1.00]
+
+    % INITIAL COORDINATES SAVED
+    \coordinate (ksi_1) at (0,0,0);
+    \coordinate (ksi_2) at (8,0,4);
+    \draw [black] (ksi_1) to (ksi_2);
+    \node [below] at (ksi_1) {$\boldsymbol{\xi}_1$};
+    \node [below] at (ksi_2) {$\boldsymbol{\xi}_2$};
+
+
+    \coordinate (x_1) at (6,0,3);
+    \coordinate (x_2) at (2,0,1);
+    \node [below] at (x_1) {$\textbf{x}_1$};
+    \node [below] at (x_2) {$\textbf{x}_2$};
+    \draw [fill] (x_1) circle [radius=0.05];
+    \draw [fill] (x_2) circle [radius=0.05];
+    \draw [fill,white] (x_1) circle [radius=0.04];
+    \draw [fill,white] (x_2) circle [radius=0.04];
+
+    \draw [<->, dotted] (5,0.3,2.5) to node [anchor=south] {\footnotesize $L_{\min}$} (3,0.3,1.5);
+    \draw [<->, dotted] (6,-0.3,3) to node [anchor=north] {\footnotesize $L_{\max}$} (2,-0.3,1);
+
+    \draw [->] (ksi_1) to (1,0,0.5);
+    \draw [->] (ksi_2) to (7,0,3.5);
+    \draw [fill] (ksi_1) circle [radius=0.05];
+    \draw [fill] (ksi_2) circle [radius=0.05];
+
+\end{tikzpicture}

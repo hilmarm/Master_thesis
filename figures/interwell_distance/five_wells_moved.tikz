@@ -1,0 +1,21 @@
+% -*- root: ../../mainThesis.tex -*-
+
+\begin{tikzpicture}[scale=1]
+
+\begin{axis}[grid=major,
+xmin=-6, xmax=6,
+ymin=-6, ymax=6,
+zmin=-6, zmax=6]
+\addplot3 coordinates { (-4.47538,2.04903,0.835263) (-3.86684,2.03064,-0.876823) };
+\addlegendentry{$\text{Well}_0$};
+\addplot3 coordinates { (0.371705,0.813908,3.3145) (1.13536,-1.85014,1.87594) };
+\addlegendentry{$\text{Well}_1$};
+\addplot3 coordinates { (-2.47505,-1.60566,0.145105) (-2.04868,-1.63303,-0.953802) };
+\addlegendentry{$\text{Well}_2$};
+\addplot3 coordinates { (4.16779,-0.856978,-1.383) (3.55651,0.0700478,-0.663997) };
+\addlegendentry{$\text{Well}_3$};
+\addplot3 coordinates { (0.127187,1.43286,-2.6773) (-0.492605,4.54932,-1.61589) };
+\addlegendentry{$\text{Well}_4$};
+\end{axis}
+
+\end{tikzpicture}

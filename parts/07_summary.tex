@@ -1,0 +1,60 @@
+% -*- root: ../mainThesis.tex -*-
+\chapter{Summary and discussion}
+%
+We summarize the results of the projection methods
+and the well index calculator and comment on the
+main points of them. 
+
+The main goal of the thesis was the solution of two sub-problems 
+occurring during the tackling of well-placement optimization, namely 
+handling of well constraints and well index calculations. These
+are important because they reflect physical properties of the 
+reservoir and are essential for a reliable and practical way
+of solving the overall well placement problem. 
+%
+\section{Projection to feasible space}
+%
+The first problem we discussed was the handling of 
+well-placement constraints. Here we introduced and 
+implemented a method based on alternating projections, 
+where one of the projections could be solved analytically, 
+while the other projection had to be solved numerically.
+
+The alternating projection method for satisfaction
+of inter-well distance and well distance constraint
+was implemented. The well distance constraint was
+solved and the analytical solutions were derived
+and implemented. 
+
+The main issue was the derivation
+of an accurate method for the projection on the 
+inter-well distance constraint. The idea of splitting
+up the problem into $k$-point solutions leads to
+different cases. The main sub-case is finding the
+roots of the sixth degree polynomial in \eqref{eq:six_degree_poly},
+which can be done efficiently with arbitrarily high
+precision. The implemented version preformed well
+overall and managed to even solve cases where one
+would expect numerical issues, such as when
+all wells are along the same line. However, the 
+implementation was not able to solve one case 
+with parallel line segments which is presented 
+in Chapter 8. The reason for this is unknown.
+%
+\section{Well index calculation}
+%
+The goal for the well index calculator was to
+implement an alternative method capable of 
+dealing with deviated and slanted wells.
+%%%%%%%%%%%%%%%%%%
+The method works by taking weighted means of the well 
+indices one would obtain for centered wells parallel to 
+the block axes, with weights depending on the projections 
+of the well on these axes. To do this we require  
+computations of entry and exit points of each of the
+blocks penetrated by the well.
+
+The implemented algorithm for finding well
+indices compared well to industry standards
+for well index calculations.
+%

@@ -1,0 +1,268 @@
+% -*- root: ../mainThesis.tex -*-
+
+% #############################################
+% DEFAULT TEXT
+\chapter{Introduction}
+%
+This chapter gives the reader an overview of
+our goals and the purpose of the work.
+We wish to contribute to the work in petroleum field development 
+by implementing constraint handling routines and a 
+well index calculator as an aid to current well placement 
+optimization methods. These implementation are made so that 
+in the future they can be integrated in FieldOpt\cite{Fieldopt},
+a petroleum field development optimization framework that will 
+aid in the operations of producing hydrocarbons from the subsurface.
+% 
+The problem of placing wells is a substantial 
+part of petroleum field development, and because of its 
+importance we should use optimization procedures to augment 
+the well placement decision-making. In this effort it is 
+important that we have a way to measure the 
+oil field production and its related costs, and that
+we are able to define good constraints, in the sense 
+that they are proper representations of petroleum engineering 
+knowledge. After we have defined the task as a 
+mathematical problem with associated constraints, we should 
+try to develop and implement efficient methods to deal with
+these constraints while maximizing income.
+%
+\paragraph{What is Petroleum Field Development(PFD).}
+%
+Petroleum Field Development is mainly concerned with maximizing 
+the return of the financial
+investment. We can gain financial revenue by increasing 
+the recovery of oil from the reservoir or by reducing the
+costs associated, e.g., drilling, labor, injection 
+and the production of water.
+%
+%
+\section{The general well placement problem}
+%
+\paragraph{What is the objective of well placement optimization.}
+%
+The problem of well placement optimization is the following:
+Given some physical information about a reservoir we wish to place 
+one or several wells in such a way that an objective is reached.
+The objective is usually to maximize the net present value, which 
+again is achieved by maintaining a high oil recovery while minimizing
+costs at the same time.
+%
+This problem is one that has been studied extensively and many 
+methods for optimizing the placement of the well have been proposed \cite{Bellout_paper}, 
+both derivative based methods and derivative-free methods. 
+%
+%
+\paragraph{How wells are parametrized.}
+%
+In the specific problem we study in this thesis,
+$\textbf{x}$ represents the position of all wells
+in the system, but generally 
+it may also include other variables such as control
+settings, bottom hole pressure or shape coefficients
+in the case of curved wells.
+%
+A single straight well can be defined by the
+coordinates of the heel and toe of the well.
+%
+As an example, four wells in three dimensional space
+can be defined by a vector $\textbf{x}$ containing
+%
+$ N= N_{wells} \cdot N_{heel and toe} \cdot N_{dimension} = 4 \cdot 2 \cdot 3 =  24$
+% 
+real numbers, i.e., $\textbf{x} \in \mathbb{R}^{24}.$ \\
+%
+The general problem can be formulated as an unconstrained
+optimization problem in the following way
+%
+\begin{equation}
+\min_{\textbf{x} \in \mathbb{R}^N} J \left( \textbf{x} \right),
+\label{introProb}
+\end{equation}
+%
+where the objective function 
+%
+$J:\mathbb{R}^N \rightarrow \mathbb{R}$ 
+%
+maps a point
+%
+$\textbf{x} \in \mathbb{R}^N$ to a real number.
+%
+$J$ determines how well the objective is reached
+in the point $\textbf{x}$. In a scenario of oil
+production $J$ is typically be defined in such a 
+way that oil production is maximized and the related costs
+(e.g., the cost of drilling, well equipment etc.)
+are minimized. 
+%
+%\mb{What are the main characteristics of the well 
+%placement problem, e.g., model-based optimization, 
+%what is a reservoir simulation, etc -- what makes 
+%the problem special?} 
+%
+\paragraph{How is the objective computed, what is a
+reservoir model/simulation.}
+%
+In order to evaluate the objective function in a point
+$\textbf{x}$ a simulation is needed to determine the 
+pressure distribution in the reservoir system. 
+% 
+This is typically done by providing a reservoir simulator, 
+such as Eclipse \cite{Eclipse}, the physical state of 
+the system which might include well block pressure,
+permeability and well indices.
+%
+\paragraph{What is the well index.}
+%
+The well index relates wellbore flow rate and
+pressure to well block quantities\cite{Wolfsteiner},
+which is important for computing oil recovery.
+%
+The well index of a well block is uniquely determined 
+by the well placement coordinates and is either left as 
+a job to the reservoir simulator or computed and given 
+as input by the user. 
+% 
+The reservoir simulator then computes the pressure 
+distribution in the reservoir by numerically solving 
+a set of partial differential equations (PDEs) which 
+then implicitly determines the oil production rate.\\
+%
+The wells in the well placement problem are treated
+as straight line segments or as continuous chains of
+straight line segments inside a reservoir of blocks.
+%
+The blocks of the reservoir have six planar faces and 
+every face of a block is either shared with the face of 
+another block or lies on the boundary of the reservoir 
+domain.
+%
+%\mb{Extension of the well placement problem,
+%e.g., we could optimize for well completions, 
+%well controls}
+%
+It is possible to extend the model to not 
+only consider the placement of wells. One
+could also include things such as time dependent 
+well control variables.
+%
+This would result in a more complex variation of 
+the original problem (\ref{introProb}), where oil 
+production is treated over a longer time span 
+instead of being instantaneous. 
+%
+Including the new variables
+could look like the following:
+%
+\begin{equation}
+\min_{\substack{\textbf{x} \in \mathbb{R}^N\\\textbf{y} \in \mathbb{R}^k }} \sum_{t} J \left( \textbf{x},\textbf{y}, t \right),
+\end{equation}
+where $\textbf{x}$ are the well placement coordinates,
+$\textbf{y}$ are the well control variables and $t$ is
+a time variable.
+%
+\paragraph{How we solve for the well placement
+problem.}
+%
+Gradients of the objective function with respect to well placement variables 
+are not readily available and are likely to be be discontinuous. As noted by Bellout et al.
+\cite{Bellout_paper} the well placement problem does not appear to be as amenable using gradient-based methods 
+because these approaches can get trapped in local minima.
+An alternative is to treat it using derivative-free approaches
+such as genetic algorithms, stochastic perturbation methods and particle swarm optimization.
+%
+%\mb{Why are constraints important for the 
+%well placement problem, what type of constraints
+%are reasonable to include in the problem}
+\paragraph{Well placement constraints.}
+% 
+It is important that the search for well configurations
+is constrained by realistic petroleum engineering 
+considerations for how best to develop the field, 
+e.g., knowledge about the geology and flow properties
+of the reservoir and information about existing or
+planned well paths and facilities.
+% 
+It is crucial for an efficient well placement optimization
+effort to articulate this type of information into a
+properly defined objective function with constraints
+that can be treated using mathematical programming.
+%
+In order for our current well placement model 
+to be practically useful there are several 
+limitations to the placement of wells. 
+%
+These include, but are not restricted to, constraints 
+on the length of a well (well length constraint), 
+how close two wells can be to each other (inter-well 
+distance constraint) and where a well is allowed to 
+reside (well domain constraint).
+%
+All of these restrictions on the wells result in 
+a number of constraints on the well coordinates.\\
+%
+%\mb{Important: How do this constraints look like, 
+%why are they easy/difficult to deal with? How do 
+%we describe them?}
+%
+\begin{itemize}
+	\item Well length restrictions require that wells should not be too short
+	but also not too long. We require that the heel $\textbf{x}^h$ and toe
+	$\textbf{x}^t$ of every well should be separated by at least a distance
+	$L_{\min}$ but not more than $L_{\max}$.
+%%%%%%%%%%%%%%%
+	\item The restriction on how close wells can be to each other results in the inter-well distance
+	constraint. Essentially wells either interfere if they are placed too close to each other
+	or it makes drilling either dangerous or impossible to perform. For all pairs of wells we require
+	that every point of one well is at least a distance $d$ away from every point of the other
+	well.
+%
+	\item A well location restriction gives a domain constraint, which demands that
+	a given well position be in some predefined feasible domain $\Omega_{wd}$.
+	Although this constraint looks simple enough, a domain
+	$\Omega_{wd}$ may be arbitrarily defined and needs not be simple or convex, making 
+	projections on it difficult to find.
+\end{itemize}
+%
+%
+\paragraph{How do we solve for the constrained well placement
+problem.}
+%
+This thesis aims to contribute to the well placement problem
+by taking well coordinates from a single unconstrained optimization
+step and developing a way to project coordinates that violate
+constraints back into feasible space in such way that the 
+coordinates of the wells are moved as little as possible.
+This process is then continued iteratively so that after every
+unconstrained optimization step we project wells so that all
+constraints are satisfied. In addition an algorithm to calculate
+the well index for deviated wells (i.e., not strictly vertical)
+described by Shu in \cite{Shu_Paper} is implemented. This
+calculation is currently not handled by FieldOpt itself but by 
+the reservoir simulators.
+%
+\paragraph{Tasks for this thesis}
+%
+\begin{itemize}
+ 	\item {Determine and implement constraints 
+ 	that are physically reasonable.}
+ 	\item {Implement a routine to deal with the 
+ 	constraint handling as an optimization problem. 
+ 	The routine projects non-feasible coordinates 
+ 	onto a feasible space.}
+ 	\item {Implement well index calculation for 
+ 	deviated (i.e., not perfectly horizontal or 
+ 	vertical) wells.}
+ \end{itemize} 
+%
+% 
+In Chapter 2 we will introduce the well placement problem and formulate the
+well constraints in a more detailed manner, in addition we will explain
+some ideas for how to handle multiple constraints. In Chapter 3 we will solve
+the individual constraint problems and in Chapter 4 a method for computing 
+the well index for blocks is outlined.
+%
+
+
+
+

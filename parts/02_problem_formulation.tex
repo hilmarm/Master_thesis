@@ -1,0 +1,294 @@
+% -*- root: ../mainThesis.tex -*-
+%
+\chapter{Problem formulation}
+%
+This chapter
+introduces the overall well placement optimization problem
+and how we represent wells. Moreover, we introduce the different 
+constraints more clearly and indicate how we intend to handle 
+several constraints at the same time.
+%
+For the rest of this thesis we will assume that a well connects
+its heel and toe in a straight line.
+We describe well $i$ with the coordinates of its heel and toe
+($\textbf{x}_i^h, \textbf{x}_i^t$) $\in \mathbb{R}^3 \times \mathbb{R}^3$.
+If we have multiple wells we collect all $N$ wells in a single variable
+$\textbf{x} \in (\mathbb{R}^3 \times \mathbb{R}^3)^N$.
+%
+\section{Well problem formulation}
+We define the overall well placement optimization problem as
+%
+\begin{equation}
+\begin{aligned}
+\min_{\textbf{x} \in (\mathbb{R}^3 \times \mathbb{R}^3)^N} J\left( \textbf{x} \right) \\
+\text{such that} \hspace{5px} \textbf{x} \in \Omega,
+\label{problemOmega}
+\end{aligned}
+\end{equation}
+% 
+% [p.16 B.Grimstad, PhD thesis]
+% [p.22 ++ O.Isebor, Phd Thesis]
+% 
+where $J: (\mathbb{R}^3 \times \mathbb{R}^3)^N \rightarrow \mathbb{R} $ is a
+user-defined objective function that maps the current well positions to a real
+number. The choice of $J$ should maximize oil production or the net present value
+while minimizing various costs such as well drilling costs, well length costs and
+other factors. For now the exact definition of $J$ is left open, as we concentrate
+on satisfying the constraints.
+
+The domain $\Omega$ is the set of all well coordinates $\textbf{x}$ that satisfy a 
+set of linear and nonlinear constraints that enforce certain restrictions which we 
+shall define below.
+%
+We need to select, develop and implement constraints with the
+physical objective of drilling in mind. 
+%
+This means constraint types for the positioning of wells
+in a reservoir should be reasonable representations of 
+engineering restrictions and priorities for how a petroleum 
+field should be developed.
+% 
+To restrain overall well configuration in field development,
+in this work we define three types of constraints: a well 
+length, an inter-well distance and a reservoir boundary 
+constraint.
+%
+\subsection{Well length constraint}
+First we must define a metric or distance function
+$g:\mathbb{R}^3 \times \mathbb{R}^3 \rightarrow \mathbb{R}$ 
+which takes two points in three dimensional space and maps 
+them to a real number. We use the most natural choice, namely
+the Euclidean distance. For two points
+$\textbf{p}, \textbf{q} \in \mathbb{R}^3$ the distance between
+them is
+%
+\begin{equation}
+ g(\textbf{p},\textbf{q}) := \| \textbf{p}-\textbf{q} \| = \sqrt{\sum_{i=1}^3 (q_i-p_i)^2}.
+ \end{equation}
+
+A well should not be longer than $L_{\max}$ nor shorter than $L_{\min}$, 
+or equivalently, the length should be in the interval $[L_{\min},L_{\max}]$.
+Note that we will also require that $L_{\min} > 0$, i.e., we don't allow
+wells of zero length.  
+The well length constraint can now be formulated as
+%
+\begin{align}
+\| \textbf{x}_i^h - \textbf{x}_i^t \| \leq L_{\max}, \\
+\| \textbf{x}_i^h - \textbf{x}_i^t \| \geq L_{\min}, \\
+\text{for all} \quad i = 1,2,\dots,N. 
+\end{align}
+
+% =============================================
+\subsection{Inter-well distance constraint}
+Every pair of wells should be at least some minimum distance $d$ apart.
+This means that every single point of one well needs to be at least a
+distance $d$ from all points of every other well.
+If a well is the straight line between the heel and toe of the well then
+this is equivalent to requiring that
+%
+\begin{align}
+\| (\textbf{x}_i^h + \lambda_1 (\textbf{x}_i^t - \textbf{x}_i^h  )) - (\textbf{x}_j^h + \lambda_2 (\textbf{x}_j^t - \textbf{x}_j^h)) \| \geq d,\\
+\quad \lambda_1, \lambda_2 \in [0,1], \\
+\text{for all pairs } (i,j) \text{ of wells with } i \neq j.
+\end{align}
+%
+%
+\subsection{Reservoir bound constraint}
+%
+The reservoir is made up of grid blocks which are convex polyhedra,
+but the reservoir itself is not necessarily convex. All 
+wells can be required to lie in a feasible domain, and heel and 
+toe might have different feasible domains. Domain bounds should
+reflect the geological situation and it might also be natural to
+assume some restriction on heel position that is given by the 
+drilling operator. If all wells lie in a feasible domain
+we say that $\textbf{x}$ is feasible, or simply that $\textbf{x} \in \Omega_{wd}$.
+Due to lack of time we were not able to define and solve a reservoir
+bound constraint, so for the rest of the thesis we will assume that
+all possible positions $\textbf{x}$ satisfy the reservoir bound constraint.\\
+
+%
+Collecting all constraints we can rewrite equation \eqref{problemOmega} as
+%
+\begin{align}
+\min_{\textbf{x}} \hspace{0.6mm} &J\left(\textbf{x}\right) \\
+\intertext{such that}
+\| \textbf{x}_i^h - \textbf{x}_i^t \| &\leq L_{\max}, \\
+\| \textbf{x}_i^h - \textbf{x}_i^t \| &\geq L_{\min},\label{eq:min_non_convex} \\
+\intertext{for all $\quad i = 1,2,\dots,N,$} 
+\| (\textbf{x}_i^h + \lambda_1 (\textbf{x}_i^t - \textbf{x}_i^h  )) - (\textbf{x}_j^h + \lambda_2 (\textbf{x}_j^t - \textbf{x}_j^h)) \| &\geq d,\label{eq:dis_non_convex}\\
+\quad \lambda_1, \lambda_2 &\in [0,1], \\
+\intertext{for all pairs $(i,j) \text{ of wells with } i \neq j,.$} \nonumber
+\end{align}
+%
+\section{Projection of multiple constraints}
+%
+Given a set of well coordinates $\textbf{x}_k$ and an
+objective function $J$, an unconstrained optimization 
+step, $O$, is performed in order to achieve an improved position
+\begin{equation}
+O: \textbf{x}_k \mapsto  \tilde{\textbf{x}}_{k+1}.
+\end{equation}
+%
+If a position $\textbf{x}$ satisfies all constraints we say
+that $\textbf{x} \in \Omega$.
+%
+If the improved position does
+not satisfy all constraints then the coordinates need to be
+projected back to feasible space by some projection method $\mathcal{P}$.
+Ideally we want to find a projection method $\mathcal{P}$
+%
+\begin{equation}
+\mathcal{P}: \tilde{\textbf{x}}_{k+1} \mapsto \textbf{x}_{k+1},
+\end{equation}
+%
+that solves the problem
+%
+\begin{align}
+\min_{\textbf{x}_{k+1}} \| \tilde{\textbf{x}}_{k+1} - \textbf{x}_{k+1} \|, \label{eq:proj_opt}\\
+\text{such that} \quad \textbf{x}_{k+1} \in \Omega,
+\end{align}
+%
+i.e., a projection that moves a position back into feasible
+space by moving the points as little as possible.
+%
+%
+\section{Simultaneous constraint projection}
+% 
+Even if an analytical solution to \eqref{eq:proj_opt} exists, i.e., 
+solving the well length constraint and inter-well distance constraint at
+the same time, it is probably very difficult because both
+\eqref{eq:min_non_convex} and \eqref{eq:dis_non_convex} are non-convex.
+
+Using numerical solvers for constrained optimization, such as \texttt{fmincon()}
+in MATLAB\cite{Matlab}, is problematic because of the implementation of 
+the constraints. Especially the well distance constraint is pretty difficult 
+to implement because of the piecewise definition of the closest points.
+Therefore we need to simplify our approach and look for a possibly (and 
+probably) suboptimal solution of \eqref{eq:proj_opt} if we wish find a working
+projection. 
+%
+\subsection{Method of alternating projections}
+%
+Alternating projections is a standard approach for this kind of problem.
+If we know how to project onto the two sets $C$ and $D$ with the 
+projections $\mathcal{P}_C$ and $\mathcal{P}_D$ respectively, then the
+alternating projection method is defined as
+%
+\begin{align}
+x_{k+1} = \mathcal{P}_C \left( \mathcal{P}_D ( x_k ) \right)
+\label{eq:alt_proj_sec}
+\end{align}
+%
+Moreover, if the sets $C$ and $D$ are convex and their intersection is non-empty, then the 
+sequence \eqref{eq:alt_proj_sec} will converge to some point in this intersection.
+
+Although we have no idea how to compute the whole projection analytically, 
+we can still compute the individual projections onto the feasible sets for 
+the well length constraint ($\mathcal{P}_{l}$), and the projection for the inter-well 
+distance constraint for two wells ($\mathcal{P}_{d}$). The details will be
+discussed in Chapter 3.
+
+Thus we can attempt to use
+the method of alternating projections to find a feasible point.
+%
+Neither the feasible points for the well length constraints 
+nor the feasible points for the inter-well distance constraint 
+form convex sets, so we cannot guarantee any global convergence of
+the method.
+
+However, in a result\cite{Lewis_Luke_Malick} by Lewis, Luke and Malick,
+\cite[Thm. 5.16]{Lewis_Luke_Malick} states the following: If we have two sets,
+$A$ and $B$, with $A$ super-regular (see \cite[Def. 4.3]{Lewis_Luke_Malick}) 
+and $B$ closed, and with non-opposing normal vectors to the sets at every point
+in their intersection, it then follows that the alternating projection converges
+locally R-linear to a point in $A \cup B$.
+%
+From \cite[Proposition 4.8]{Lewis_Luke_Malick} we have that amenability implies super regularity, and
+the remark one line earlier states that if $A$ is defined by $C^1$ inequality 
+constraints and the Mangasarian-Fromowitz constraint qualification \cite[Def. 12.6]{Nocedal_Wright} 
+(or the stronger linear independence constraint qualification) holds, then A is amenable.
+%
+By calculating the gradient of the well length constraint \eqref{eq:min_non_convex}
+we get that
+%
+\begin{align}
+\nabla \left( \frac{1}{2} \| x - y \|^2 - \frac{1}{2}L_{\min}^2 \right) = \begin{bmatrix} x-y \\y-x \end{bmatrix},
+\end{align}
+%
+which is non-zero for all $x \neq y$. Now since we require that wells have non-zero
+length, this implies that $x \neq y$. This means that the well length constriction
+satisfies the linear independence constraint condition which in turn implies that
+the set of feasible points for the well length constraint is super-regular.
+%
+Therefore it follows that the alternating projection of the well length constraint
+and the inter-well distance constraint is locally convergent. Note, however, that 
+this result for the projections $\mathcal{P}_{l}$ and $\mathcal{P}_{d}$ only
+holds for two wells.
+%
+\subsection{Inter-well distance projection on more than two wells}
+%
+The treatment of the inter-well distance constraint is particularly
+difficult for multiple wells because it puts requirements on every 
+pair of wells, and thus it increases in complexity as the number of 
+wells increases.
+%
+In order to solve the inter-well distance constraint problem in a
+system with more than two wells, we apply the projection $\mathcal{P}_{d}$
+to two wells at a time and hope that it eventually converges. Call this
+projection process $\mathcal{P}_{m}$.
+%
+\subsection{Alternating projection pseudo code}
+%
+Here we provide a pseudo code of the algorithm for the
+locally convergent alternating projection method for two
+wells. Note that by replacing $\mathcal{P}_{d}$ with
+$\mathcal{P}_{m}$ the code can also attempt to solve 
+the projection problem for more than two wells.
+%
+
+%
+\begin{algorithm}
+\caption{Constraint handling}\label{alg:constraint_handling}
+\begin{algorithmic}[1]
+\Procedure{Project coordinates to feasible space}{}
+	\State Get initial coordinates $\textbf{y} \gets \textbf{x}$ 
+	\State
+	\While{$\textbf{x}_{k}$ not feasible}
+		\State{$\textbf{y} \gets \mathcal{P}_{l}(\textbf{y})$}
+		\State{$\textbf{y} \gets \mathcal{P}_{d}(\textbf{y})$}
+	\EndWhile
+	\State Return $\textbf{y}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+%
+%
+The complete iterative optimization process can be done by using
+the optimization step $O$ and the projections $\mathcal{P}_{l}$ and
+$\mathcal{P}_{d}$. Note again that the process extends to handling
+multiple wells if we replace $\mathcal{P}_{d}$ with $\mathcal{P}_{m}$.
+%
+\begin{algorithm}
+\caption{Iterative optimization method}\label{alg:iterative_optimization}
+\begin{algorithmic}[1]
+\Procedure{Optimize constrained problem}{}
+	\State Get initial coordinates $\textbf{x}_{0}$
+	\State
+	\State $ k = 0 $
+	\While{$J(\textbf{x}_{k}$) not optimal}
+		\State{$\tilde{\textbf{x}}_{k+1} \gets O(\textbf{x}_{k})$}
+		\While{$\tilde{\textbf{x}}_{k+1}$ not feasible}
+			\State{$\tilde{\textbf{x}}_{k+1} \gets \mathcal{P}_{l}(\tilde{\textbf{x}}_{k+1})$}
+			\State{$\tilde{\textbf{x}}_{k+1} \gets \mathcal{P}_{d}(\tilde{\textbf{x}}_{k+1})$}
+		\EndWhile
+	\State $\textbf{x}_{k+1} \gets \tilde{\textbf{x}}_{k+1}$
+	\State $ k = k+1 $
+	\EndWhile
+	\State Return $\textbf{x}_{k}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+%
+
+The solution for each individual projection will be handled in the next chapter.

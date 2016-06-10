@@ -1,0 +1,24 @@
+% -*- root: ../../mainThesis.tex -*-
+
+\begin{tikzpicture}[scale=1.00]
+
+    \coordinate (x_1) at (-3.5,0);
+    \coordinate (x_2) at (-2,0);
+    \coordinate (x_3) at (0,0);
+    \coordinate (x_4) at (0.7,-2);
+    \coordinate (x_5) at (0,0);
+
+    \node [above] at (x_3) {$\textbf{x}_1$};
+    \node [below] at (x_4) {$\textbf{x}_2$};
+    \draw [fill] (x_3) circle [radius=0.05];
+    \draw [fill] (x_4) circle [radius=0.05];
+
+    \draw [-, dotted] (x_1) to node [anchor=south] {\footnotesize SD} (x_3);
+    \draw [-, dotted] (x_1) to (x_2);
+    \draw [-] (x_2) to (x_3);
+    \draw [-] (x_4) to node [anchor=west] {\footnotesize $S_1$} (x_5);
+    \draw[black] (-0.5,0) arc (-180:-70:0.5cm);
+    \node [left] at (-0.3,-0.6) {\footnotesize $\alpha > 90^{\circ}$};
+
+
+\end{tikzpicture}

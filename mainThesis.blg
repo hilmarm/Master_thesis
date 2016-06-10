@@ -1,0 +1,69 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: mainThesis.aux
+A level-1 auxiliary file: FrontBackMatter/abstract_eng.aux
+A level-1 auxiliary file: FrontBackMatter/preface.aux
+A level-1 auxiliary file: FrontBackMatter/acknowledgements.aux
+A level-1 auxiliary file: parts/appendix.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: /home/cutie/Dropbox/SharedFieldOptDev15/files_HM/Thesis/bibtex_references/references.bib
+I was expecting a `,' or a `}'---line 42 of file /home/cutie/Dropbox/SharedFieldOptDev15/files_HM/Thesis/bibtex_references/references.bib
+ :     
+ :     pages     = "1061-1079",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty year in Bellout_paper
+Warning--empty journal in Shu_Paper
+Warning--edition ordinal word "second edition" may be too high (or improper) for conversion in Nocedal_Wright
+
+Done.
+You've used 16 entries,
+            4039 wiz_defined-function locations,
+            909 strings with 9487 characters,
+and the built_in function-call counts, 8115 in all, are:
+= -- 647
+> -- 149
+< -- 46
++ -- 77
+- -- 27
+* -- 363
+:= -- 1364
+add.period$ -- 31
+call.type$ -- 16
+change.case$ -- 19
+chr.to.int$ -- 102
+cite$ -- 19
+duplicate$ -- 635
+empty$ -- 685
+format.name$ -- 33
+if$ -- 1788
+int.to.chr$ -- 0
+int.to.str$ -- 16
+missing$ -- 124
+newline$ -- 87
+num.names$ -- 15
+pop$ -- 329
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 4
+skip$ -- 626
+stack$ -- 0
+substring$ -- 216
+swap$ -- 440
+text.length$ -- 12
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 16
+warning$ -- 3
+while$ -- 28
+width$ -- 18
+write$ -- 174
+(There was 1 error message)

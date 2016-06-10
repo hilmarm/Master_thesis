@@ -1,0 +1,64 @@
+% -*- root: ../mainThesis.tex -*-
+
+\begin{abstract}
+Well placement optimization is an important part of Petroleum Field Development. 
+However, in order to improve the optimization procedures, it can be important to 
+incorporate considerations like knowledge about the geology of the reservoir or 
+about existing or planned well paths. This leads to additional constraints that 
+have to be satisfied during the optimization. In this thesis we concentrate in 
+particular on constraints on the well lengths and the distance between the wells.
+
+We suggest an alternating projections method to deal with both constraints at the 
+same time, and develop an efficient numerical method for the solution. Although we 
+cannot prove that the method is convergent, numerical results of our implementation 
+indicate that the approach works as intended.
+
+An additional important contribution from this work is the 
+implementation of a well index calculator.
+% 
+In reservoir simulation, the well index relates the flow rate 
+and pressure of the wellbore to the pressure solution of the 
+subsurface fluid flow system, and is therefore an essential 
+part in computing resulting production volumes. 
+
+We also implement an algorithm that, given a slanted 
+well and the physical state of a reservoir, calculates 
+the well indices for the well blocks that are intersected 
+by the well. 
+% 
+In particular the well index calculation for deviated wells 
+is a nontrivial task that is important for well placement 
+optimization research.
+% 
+This task is already handled by some industry reservoir 
+simulators, but the implementation is hidden from the 
+end-user.
+
+All of the implementations are meant to be an addition to FieldOpt, a petroleum 
+field development optimization framework that is currently under development by 
+the Petroleum Cybernetics Group at NTNU.
+\end{abstract}
+
+% Constrained well placement optimization is an 
+% important part of Petroleum Field Development.
+% %
+% We formulate and solve the projections
+% on a well length constraint and an inter-well
+% distance constraint. We implement algorithms that
+% efficiently solve the individual constraints.
+
+% We then suggest an alternating projections method
+% to deal with both constraints at the 
+% same time, and although we cannot prove that the 
+% method is convergent, numerical results of our 
+% implementation imply that the approach works. 
+
+% We also implement an algorithm that, given a well
+% and the physical state of a reservoir, calculates
+% the well indices for the well blocks that are 
+% intersected by the well.
+
+% All of the implementations are meant to be an
+% addition to FieldOpt, a petroleum field development 
+% optimization framework that is currently under
+% development by the Petroleum Cybernetics Group at NTNU.

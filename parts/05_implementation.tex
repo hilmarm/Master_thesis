@@ -1,0 +1,115 @@
+% -*- root: ../mainThesis.tex -*-
+%
+\chapter{Implementation}
+%
+Here we briefly explain the implementations that were
+made and the most important part of the code can
+be seen in the Appendix. For the full code we refer
+to the author's Github repository\cite{Hilmar_git}.
+%
+\section{Software}
+All code was written in Qt 5.5, a cross-platform application and UI 
+framework for C++ developed by The Qt Company\cite{QtCompany}.
+%
+The code makes great use of the Eigen library\cite{Eigen_library} 
+which is a template library for linear algebra that includes
+matrix and vector classes and algorithms for matrix decompositions.
+This is required in the implementation of the inter-well distance
+projection for finding the eigenvalue decomposition needed in
+\eqref{eq:interwell_s}. The vector class \texttt{Vector3d} of
+the Eigen library is also used frequently throughout most
+implementations as it contains many useful functions.
+%
+In order to find the roots of polynomials we make use of the 
+RPOLY library \cite{Rpoly}, which is an implementation of the 
+Jenkins-Traub algorithm\cite{Jenkins_traub}. This is needed for
+solving the sixth degree equation \eqref{eq:six_degree_poly} 
+which is the most important part of the inter-well distance 
+projection.
+%
+%
+\section{Well length constraint projection}
+%
+The function \texttt{well\_length\_projection\_eigen()}, takes
+the initial coordinates of the heel and toe of a well, and by
+calculating the distance between them it determines which of the 
+solutions \eqref{eq:solution_min_triv} -- \eqref{eq:wl_formula_last}
+it should return.  
+%
+%
+\section{Inter-well distance constraint projection}
+%
+In the function \texttt{interwell\_constraint\_projection\_eigen()}
+which was implemented we take the initial coordinates of two
+wells and a distance $d$ as input. Then we try to find solutions by 
+moving as few points as possible. First we try to move only two
+points by using \texttt{well\_length\_projection\_eigen()}.
+If some two-point solution is feasible for the complete
+problem we return the best one. If no two-point solution is
+found we try the three-point solutions. This is done by
+building $A$ and $b$ according to \eqref{eq:A_b_three_points},
+and then running \texttt{kkt\_eq\_solutions\_eigen($A,b$)} which
+returns all candidate solutions of \eqref{eq:interwell_matrix}.
+If one or more feasible solutions are found we pick the best one.
+If no solution has been found yet we must have a four-point
+solution. We build $A$ and $b$ according to \eqref{eq:A_b_three_points}
+and pick the best solution returned by 
+\texttt{kkt\_eq\_solutions\_eigen($A,b$)}.
+%
+\section{Alternating projections}
+%
+Now that both well length projection and inter-well distance
+projection are available, the method of alternating projections
+is simply done by running one projection after the other inside
+a while loop until the well positions are feasible. Note that
+we can also change the order of the projections, which might
+impact the solution. In our implementation the inter-well
+distance projection was done first.
+%
+\section{Well index calculation and intersecting blocks}
+%
+In order to compute the well indices for the well blocks
+of a reservoir, we first need to determine which blocks
+are penetrated by a well and what the entry and exit points
+are. If these two steps are handled, then computing the well
+index for each block is done by computing the well block
+projections as shown in Figure \ref{fig:well_index} and then
+supplying the block dimensions and permeabilities and using
+\eqref{eq:well_index}. Here we describe the algorithm
+used to find the well blocks which are intersected by a well
+and in which points the intersections occur. Well blocks will
+only be referred to as blocks.
+%
+Assume that \texttt{GetblockEnvelopingPoint($p$)} returns a block 
+that contains the point $p$. Assume also that \texttt{FindIntersectionPoints}(block, line)
+calculates the two intersection points 
+between a line segment and a block.\\
+%
+A list of intersected blocks and their entry and exit points are created
+and returned at the end of the algorithm.
+%
+\begin{algorithm}
+\caption{Input: reservoir(blocks), line(start point, end point) }\label{alg:block_intersection}
+\begin{algorithmic}[1]
+\Procedure{Find intersected blocks}{}
+\State first block $\gets$ \texttt{GetblockEnvelopingPoint}(start point)
+\State last block $\gets$ \texttt{GetblockEnvelopingPoint}(end point)
+\State Set current block = first block
+\State 
+\While {current block $!=$ last block}
+	\State intersection points $\gets$ \texttt{FindIntersectionPoints}(current block, line)
+	\State add intersection points to list
+	\State add current block to list
+	\State
+	\State new point $\gets$ Move small distance out of current block in direction of \hspace{10mm} .\hspace{10mm} end point
+	\State 
+	\State current block $\gets$ \texttt{GetblockEnvelopingPoint}(new point)
+	\State 
+\EndWhile
+
+\State Add last block to list
+\State Return lists
+
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

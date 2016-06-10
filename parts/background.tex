@@ -1,0 +1,41 @@
+% -*- root: ../mainThesis.tex -*-
+
+% #############################################
+% DEFAULT TEXT
+\chapter{Background}
+%
+Some general background of methods and mathematics which will be used in this paper
+%
+\section{Method of Lagrange multipliers}
+%
+In the area of mathematical optimization theory the method of Lagrange multipliers is 
+a way of finding local minima and maxima of a function subject to one or more equality 
+constraints. E.g. solve:
+%
+\begin{equation}
+\min_{\textbf{x}} f(\textbf{x}) \quad \text{subject to} \quad  c_i(\textbf{x}) = 0
+\label{lagrangeEx}
+\end{equation}
+%
+Where $\textbf{x} \in \mathbb{R}^n $ and $f,c_i : \mathbb{R}^n \rightarrow \mathbb{R} $.
+By introducing the \textit{Lagrangian function} (\cite{Nocedal_Wright})
+%
+\begin{equation}
+\mathcal{L} (\textbf{x}, \lambda) = f(\textbf{x}) - \lambda c_1(\textbf{x}),
+\label{lagrangian}
+\end{equation}
+%
+where $\lambda \in \mathbb{R}$ is a Lagrange multiplier. It can be shown that for every 
+local minimum $\textbf{x}^*$ there exists a scalar $\lambda^*$ such that:
+%
+\begin{equation}
+\nabla_{\textbf{x}, \lambda} \mathcal{L} (\textbf{x}^*, \lambda^*) = 
+\begin{bmatrix}
+	0 \\
+	0 \\
+	\vdots \\
+    0   
+\end{bmatrix}
+\label{optimumNecessary}
+\end{equation}
+%

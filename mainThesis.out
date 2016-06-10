@@ -1,0 +1,49 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{The general well placement problem}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{Problem formulation}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Well problem formulation}{chapter.2}% 4
+\BOOKMARK [2][-]{subsection.2.1.1}{Well length constraint}{section.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.1.2}{Inter-well distance constraint}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.3}{Reservoir bound constraint}{section.2.1}% 7
+\BOOKMARK [1][-]{section.2.2}{Projection of multiple constraints}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Simultaneous constraint projection}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.3.1}{Method of alternating projections}{section.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.3.2}{Inter-well distance projection on more than two wells}{section.2.3}% 11
+\BOOKMARK [2][-]{subsection.2.3.3}{Alternating projection pseudo code}{section.2.3}% 12
+\BOOKMARK [0][-]{chapter.3}{Constraint handling}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Well length constraint}{chapter.3}% 14
+\BOOKMARK [2][-]{subsection.3.1.1}{Case 1. Initial points feasible}{section.3.1}% 15
+\BOOKMARK [2][-]{subsection.3.1.2}{Case 2. Initial points too close}{section.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.1.3}{Case 3. Initial points too distant}{section.3.1}% 17
+\BOOKMARK [1][-]{section.3.2}{Inter-well distance constraint}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.2.1}{Number of points moved}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.2}{Four-point solution}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.3}{Three-point solution}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.4}{Two-point solution}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.5}{Complete inter-well distance constraint solution}{section.3.2}% 23
+\BOOKMARK [0][-]{chapter.4}{Well index calculation}{}% 24
+\BOOKMARK [1][-]{section.4.1}{Projection well index}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.2}{Computing well trajectory and projection}{chapter.4}% 26
+\BOOKMARK [0][-]{chapter.5}{Implementation}{}% 27
+\BOOKMARK [1][-]{section.5.1}{Software}{chapter.5}% 28
+\BOOKMARK [1][-]{section.5.2}{Well length constraint projection}{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.3}{Inter-well distance constraint projection}{chapter.5}% 30
+\BOOKMARK [1][-]{section.5.4}{Alternating projections}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.5}{Well index calculation and intersecting blocks}{chapter.5}% 32
+\BOOKMARK [0][-]{chapter.6}{Results and numerical tests}{}% 33
+\BOOKMARK [1][-]{section.6.1}{Well constraint projections}{chapter.6}% 34
+\BOOKMARK [2][-]{subsection.6.1.1}{Well length projection}{section.6.1}% 35
+\BOOKMARK [2][-]{subsection.6.1.2}{Inter-well distance projection}{section.6.1}% 36
+\BOOKMARK [2][-]{subsection.6.1.3}{Alternating projections to joint problem}{section.6.1}% 37
+\BOOKMARK [1][-]{section.6.2}{Well index calculation}{chapter.6}% 38
+\BOOKMARK [0][-]{chapter.7}{Summary and discussion}{}% 39
+\BOOKMARK [1][-]{section.7.1}{Projection to feasible space}{chapter.7}% 40
+\BOOKMARK [1][-]{section.7.2}{Well index calculation}{chapter.7}% 41
+\BOOKMARK [0][-]{chapter.8}{Further work}{}% 42
+\BOOKMARK [1][-]{section.8.1}{FieldOpt integration}{chapter.8}% 43
+\BOOKMARK [1][-]{section.8.2}{Well length constraint projection}{chapter.8}% 44
+\BOOKMARK [1][-]{section.8.3}{Inter-well distance constraint projection}{chapter.8}% 45
+\BOOKMARK [1][-]{section.8.4}{Alternating projections}{chapter.8}% 46
+\BOOKMARK [0][-]{appendix.A}{Code}{}% 47
+\BOOKMARK [1][-]{section.A.1}{Code for well constraint projection}{appendix.A}% 48
+\BOOKMARK [1][-]{section.A.2}{Code inter-well distance projection}{appendix.A}% 49

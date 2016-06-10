@@ -1,0 +1,19 @@
+% -*- root: ../../mainThesis.tex -*-
+
+\begin{tikzpicture}[scale=1]
+
+    \foreach \y in {0, 1, ...,5} {
+        \foreach \x in {0, 1, ...,5} {
+            \draw [] (\x,\y,0) to (\x,\y+1,0) to (\x+1,\y+1,0) to (\x+1,\y,0) to (\x,\y,0);
+        }
+    }
+
+    \draw [thick, red] (0.5,0.5,0) to (5.5,0.5,0);
+
+    % Axis
+    \draw [->] (-1,0,.5) to (-.5,0,.5) node [anchor=west]       {\footnotesize$x$};
+    \draw [->] (-1,0,.5) to (-1,.5,.5) node [anchor=south]      {\footnotesize$y$};
+    \draw [->] (-1,0,.5) to (-1,0,0)   node [anchor=south west] {\footnotesize$z$};
+
+
+\end{tikzpicture}

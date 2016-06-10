@@ -1,0 +1,113 @@
+% ==========================================================
+% PREAMBLE
+\input{./preambles/preamble.tex}
+\input{./preambles/preamble-addon-colors.tex}
+\input{./preambles/preamble-addon-figures.tex}
+
+% ==========================================================
+% LATEX DOCUMENT
+\begin{document}
+%
+
+\title{\textbf{Development of constraint handling 
+techniques for well placement optimization in 
+Petroleum Field Development}
+% \texttt{Development of problem formulation} 
+}
+
+\subtitle{Problem formulation and implementation for FieldOpt software including well index calculation for deviated wells}
+
+% AUTHOR
+\author{
+Hilmar Magnusson\\
+\texttt{hilmarm@stud.ntnu.no}
+} 
+
+% DATE
+\date{\today}
+
+% TITLE 
+%  \maketitle
+% \clearpage
+
+% ABSTRACT
+% PREFACE (BEFORE TOC?)
+
+\frontmatter
+\pagestyle{plain}
+\include{FrontBackMatter/abstract_eng}
+%\include{FrontBackMatter/abstract_nor}
+\include{FrontBackMatter/preface}
+\include{FrontBackMatter/acknowledgements}
+
+%
+% TOC
+\renewcommand{\contentsname}
+{Table of contents}
+\tableofcontents
+\setcounter{tocdepth}{3}
+\clearpage
+
+% BIBENTRIES
+% \nobibliography* % to insert bibentries
+% tells bibentry to load bibliography 
+% database from the \bibliography command
+
+\newcommand{\mb}[1]{\btxt{#1}}
+\newcommand{\hmm}[1]{\rtxt{#1}}
+
+\mainmatter
+\pagestyle{custom-fancy}
+% ==========================================================
+% PARTS
+% CHAPTER 1: INTRODUCTION, A.K.A., BACKGROUND
+\input{parts/01_intro.tex} \clearpage
+
+% CHAPTER 2: PROBLEM FORMULATION (THEORY/DESCRIPTION)
+\input{parts/02_problem_formulation.tex} \clearpage
+
+% CHAPTER EXTRA: MATHEMATICAL BACKGROUND\tabularnewline
+%\input{parts/background.tex} \clearpage
+
+% CHAPTER 3: CONSTRAINT HANDLING (THEORY/DESCRIPTION)
+\input{parts/03_constraint_handling.tex} \clearpage
+
+% CHAPTER 4: WELL INDEX CALCULATION (THEORY/DESCRIPTION)
+\input{parts/04_well_index_calculation.tex} \clearpage
+
+\input{parts/05_implementation.tex} \clearpage
+
+% CHAPTER 5: IMPLEMENTATION 1 + TESTING: 
+% SOLVE CONSTRAINT HANDLING PROBLEM FOR SIMPLE CASE
+% Sub problem 1: WELL LENGTH CONSTRAINT
+% Sub problem 2: INTER WELL DISTANCE CONSTRAINT
+% Sub problem 3: WELL DOMAIN
+% CHAPTER 6: IMPLEMENTATION 2 + TESTING: 
+% SOLVE SIMBLE WELL PLACEMENT OPTIMIZATION CASE USING
+% DEVELOPED CONSTRAINT HANDLING TECHNIQUE + WELL INDEX 
+% CALCULATION
+\input{parts/06_results.tex} \clearpage
+
+% CHAPTER 7: SUMMARY
+\input{parts/07_summary.tex} \clearpage
+
+% CHAPTER 7: FURTHER WORK
+\input{parts/08_further_work.tex} \clearpage
+
+\appendix
+\include{parts/appendix}
+% APPENDIX A: CODE FOR CONSTRAINT HANDLING
+
+% APPENDIX B: CODE FOR WELL INDEX CALCULATION
+
+
+
+
+
+% ==========================================================
+% REFERENCES
+\bibliographystyle{IEEEtran}
+\bibliography{/home/cutie/Dropbox/SharedFieldOptDev15/files_HM/Thesis/bibtex_references/references}
+\clearpage
+
+\end{document}\grid
